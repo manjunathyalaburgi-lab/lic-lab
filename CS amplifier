@@ -126,7 +126,7 @@ Final Designed Values:
     L = 360e-9
     CL = 0.5pF
 
-CIRCUIT:
+CIRCUIT:![Image description](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/Screenshot%202026-02-22%20222702.png)
 
 DC OPERATING POINT ANALYSIS:
     To ascertain the NMOS transistor's quiescent operating point (Q-point) and make sure it functions in the saturation region necessary for appropriate
@@ -163,6 +163,7 @@ Final DC Operating Point:
     ID = 149.964uA
     VD = 0.600142V
     Saturation Condition Verified
+![Image description](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/Screenshot%202026-02-22%20222620.png)
 
 TRANSIENT ANALYSIS:
     Transient analysis is done to see the time-domain behavior of the NMOS Common Source amplifier. 
@@ -171,6 +172,7 @@ TRANSIENT ANALYSIS:
     -Voltage gain
     -Phase reversal
     -Signal distortion (if any)
+![Image description](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/Screenshot%202026-02-23%20005044.png)
 1. Theoretical Voltage Gain
     Voltage gain of a Common Source amplifier:
     Av ​= −gm​RD
@@ -212,6 +214,7 @@ TRANSIENT ANALYSIS:
 AC ANALYSIS – GAIN AND BANDWIDTH:
     The AC analysis is carried out to identify the frequency response of the NMOS Common Source Amplifier. The mid-band gain can be extracted from the flat region of the response,
     and the bandwidth is calculated using the −3 dB frequency from the AC magnitude response.
+![Image description](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/Screenshot%202026-02-23%20005105.png)
 
     A.Mid Band Gain
     From the flat portion of the AC magnitude plot:
