@@ -1,0 +1,273 @@
+EXPERIMENT 1
+
+AIM:
+Design CS amplifier using nMOSFET in tsme 180nmtech.lib in LT spice
+USE: VDD=1.2V  p<=0.4mW  CL=0.2pF  Ln=360nm
+Designed amplifier is analyzed using DC operating point analysis,Transient analysis, and AC analysis techniques to evaluate its biasing condition, gain, and frequency response.
+
+COMPONENTS REQUIRED:
+-NMOS transistor
+-Drain load resistor(Rd)
+-DC voltage source(1.2V supply)
+-Load capacitor (0.5pF)
+-LTspice simulation software
+
+THEORY:
+One of the key components in analog is MOSFET. MOSFETs are frequently used as amplifying elements in analog design due to their
+ability to translate changes in input voltage into changes in output current.
+A Common Source amplifier is one of the most widely used single-stage amplifier configurations. 
+In this arrangement:
+-The source terminal is connected to ground.
+-The input signal is applied to the gate terminal.
+-The output is taken from the drain terminal.
+-The drain is connected to VDD through a load resistor.
+
+Condition for NMOS Saturation:
+For proper linear amplification, the NMOS transistor must operate in the saturation region.
+The required conditions are:
+--VGS > VT
+--VDS ​>= VGS ​− VT
+WHERE:
+      VGS = Gate-to-Source voltage
+      VDS = Drain-to-Source voltage
+      VT = Threshold voltage
+      OV = VGS − VT (Overdrive voltage)
+PROCEDURE:
+1. The Technology Library is included
+    The.lib command was used to add the TSMC 180 nm transistor model file to LTspice.
+2. Circuit Construction
+    The circuit for the NMOS Common Source was constructed using:
+    -Source terminal connected to ground
+    -A resistor (RD) connects the drain to VDD.
+    -Gate biased using a DC voltage source
+    -A tiny AC signal that is superimposed at the input
+    -Load capacitor (0.2 pF) connected at the output node
+3. Current Bias Selection
+    P <= 0.4mW
+    P = VDD​*ID
+    ID ​= P/VDD​
+        0.4mW/1.2
+    ID = 333.33uA
+    For safe design margin, the drain current was selected slightly below this limit 
+    ID = 150uA
+4. Choosing Channel Length and Width
+    As stated, the channel length was fixed at 360 nm.
+    The saturation current equation was used to theoretically determine the NMOS transistor's width, which was then modified in simulation to reach the desired operating point.
+5. Analysis of DC Operating Points
+    The .op command was executed in LTspice to determine:
+    -Drain current (ID)
+    -Output voltage (Vout)
+    -Node voltages
+6. Adjusting Width Iteratively
+    The transistor width was gradually adjusted while holding L constant if the obtained drain current was less or more than the necessary value.
+    Until the power constraint and appropriate midpoint biasing were reached, the procedure was repeated.
+​​​7. Saturation Verification
+    VDS​ >= VOV
+    Thus ensuring proper saturation operation for linear amplification.
+8. Transient Analysis
+    DC bias and a tiny sinusoidal input signal were applied at the gate. The time-domain output waveform was seen to: Using the .tran command
+    -Check for signal amplification.
+    -Verify the 180° shift, or phase inversion.
+    -Check for any distortion.
+9. AC Small-Signal Analysis
+    The input source's AC amplitude was set to 1 V.
+    .ac dec command was executed to obtain:
+    Mid-band voltage gain
+    −3 dB bandwidth
+    Frequency response curve.
+
+DESIGN CALCULATIONS:
+To ensure the transistor operates in saturation and to choose appropriate bias parameters, the approximate operating values are computed analytically 
+prior to circuit implementation in LTspice.
+1. Determination of Maximum Drain Current:
+    P <= 0.4mW
+    P = VDD * ID
+    ID = P/VDD
+    ID = 0.4 e-3 / 1.2
+    ID = 333.33uA
+  A design current that is just below the maximum value is chosen in order to prevent going over the power limit:
+    ID = 150uA
+2. Selection of Output Voltage:
+    VD = VDD/2
+    VD = 1.2/2
+    VD = 0.6V
+3. Calculation of Drain Resistor RD:
+    RD​ = ​VDD​−VD / ID
+    RD = 1.2 - 0.6 / 150 e-6
+    RD = 4k
+4. Determination of Gate-Source Voltage and Overdrive Voltage
+    The threshold voltage magnitude is:
+    VT = 0.366V
+    To ensure saturation operation, choose:
+    VSG = 0.6 V
+    Overdrive voltage is:
+    VOV = VGS − VT
+    VOV = 0.6 − 0.366
+    VOV = 0.234 V
+5. NMOS Width Calculation:
+    ID = 1/2(UnCox(W/L)(VGS - VT)e2)
+    W = 2IDL / UnCox(VGS - VT)²
+    NOW, kn' = UnCox
+             = Un*epsilon/tox
+             = 273.809e-4*epsilon0*3.9/4.1e-9
+             = 2.306e-4
+    W = 150e-6*360e-9*2/2.306e-4*(0.6-0.366)² 
+    W = 8.5532e-6m
+6. Saturation Check:
+    VDS >= VGS - VT
+    0.6 > 0.234
+    Saturation condiyion satisfied
+
+Final Designed Values:
+    ID = 150uA
+    RD = 4k
+    VD = 0.6V
+    W = 8.5532e-6
+    L = 360e-9
+    CL = 0.5pF
+
+CIRCUIT:
+
+DC OPERATING POINT ANALYSIS:
+    To ascertain the NMOS transistor's quiescent operating point (Q-point) and make sure it functions in the saturation region necessary for appropriate
+    amplification, DC analysis is carried out. A precise bias point is established to guarantee linear operation and avoid signal distortion.
+Q-POINT VERIFICATION USING DC OPERATING POINT ANALYSIS:
+    The NMOS transistor's theoretically determined width is:
+    W = 8.5532μm    
+    Following LTspice's .op analysis, the following simulation results were obtained:
+    ID = 91.082uA
+    VD = 0.8356V
+    These values are lower than the expected design current of: ID = 150uA
+    The higher drain voltage (0.8356 V) suggests that there is not enough drain current to create the necessary voltage drop across the drain resistor.
+
+WIDTH ADJUSTMENT FOR REQUIRED OPERATING POINT:
+    The transistor width was progressively increased while maintaining all other parameters constant in order to achieve the intended drain current of roughly 150 µA.
+    The width was adjusted iteratively to:
+    𝑊 = 15.1uW
+    The.op command was used to reevaluate the DC operating point.
+    The newly acquired operating point was:
+    𝐼𝐷 = 149.964 uA
+    VD= 0.600142 V
+    These values closely align with the anticipated design goals:
+    ID = 150uA
+    VD = 0.6V 
+    This results in appropriate midpoint biasing.
+
+Saturation Condition Verification:
+    For NMOS saturation:
+    VDS >= VGS - VT
+    0.600142V = 0.234V
+
+Final DC Operating Point:
+    W = 15.1uA
+    ID = 149.964uA
+    VD = 0.600142V
+    Saturation Condition Verified
+
+TRANSIENT ANALYSIS:
+    Transient analysis is done to see the time-domain behavior of the NMOS Common Source amplifier. 
+    A small sinusoidal signal with proper DC bias is applied to the gate terminal.
+    The .tran command is used to analyze:
+    -Voltage gain
+    -Phase reversal
+    -Signal distortion (if any)
+1. Theoretical Voltage Gain
+    Voltage gain of a Common Source amplifier:
+    Av ​= −gm​RD
+      Transconductance Calculation:
+      gm ​= ​2ID/Vov
+      gm = 2*150e-6 / 0.234
+      gm = 1.2820e-3 
+    Gain Calculation:
+      RD = 4k
+      Av = - 1.2820e-3 * 4e3
+      Av = 5.128
+    Gain in dB:
+    Gain(dB) = 20log10​(Av​)
+    Gain(dB) = 20log10​(5.128)
+    Gain(dB) = 14.1989
+
+    Simulation Gain (From WaveForm)
+    From transient simulation:
+    input p-p = 3.153 mV
+    Output p-p = 16.662 mV
+    Voltage gain:
+    Av = Vout / Vin
+    Av = 16.662 / 3.153
+    Av = 5.2844
+
+    Gain in dB:
+    Gain(dB) = 20log10​(Av​)
+    Gain(dB) = 20log10​(5.2844)
+    Gain(dB) = 14.4592
+
+    Comparison
+    Theoretical Gain = 14.1989 dB
+    Simulation Gain = 14.4592 dB
+    The slight difference occurs due to:
+    • Channel length modulation
+    • Short channel effects
+    • Output resistance (ro)
+
+AC ANALYSIS – GAIN AND BANDWIDTH:
+    The AC analysis is carried out to identify the frequency response of the NMOS Common Source Amplifier. The mid-band gain can be extracted from the flat region of the response,
+    and the bandwidth is calculated using the −3 dB frequency from the AC magnitude response.
+
+    A.Mid Band Gain
+    From the flat portion of the AC magnitude plot:
+    Gain in dB = 13.478 dB
+    Convert to linear scale:
+    Av = 10^(Gain(dB)/20)
+    Av = 10^(13.478/20)
+    Av = 4.7195
+
+    B.Theoritical Bandwidth
+    The theoretical bandwidth of a single-pole amplifier is given by:
+    BW = 1 / (2 × π × RD × CL)
+    Given:
+    RD = 4 kΩ
+    CL = 0.5 pF
+    BW = 1 / (2 × π × 4000 × 0.5 × 10^-12)
+    BW = 79.577 MHz
+
+    C.Simulation Bandwidth
+    From the AC response plot, the −3 dB cutoff frequency is observed at:
+    BW_simulation ≈ 81.599 MHz
+    This frequency corresponds to the point where the gain drops by 3 dB from the
+    mid-band value.
+
+    D.Unity Gain Bandwidth
+    For a single-pole amplifier, the gain-bandwidth product is constant and given by:
+    UGB = Av × BW
+    From AC analysis, Av = 4.7195 and BW = 81.599 MHz,
+    hence:
+    UGB = 4.7195 * 81.599 = 385.1064 MHz, which is close to the unity gain frequency observed
+    in the plot (377.487 MHz).
+
+RESULT:
+    The NMOS Common Source amplifier circuit was successfully designed and simulated using the TSMC 180nm CMOS process in LTspice.
+    The DC operating point of the amplifier circuit, as obtained from the simulation result, is given by the drain current of approximately:
+    ID​=149.964uA​​​
+    VD​=0.600142V
+    This confirms proper midpoint biasing and operation in the saturation region.
+    The transient analysis showed that the output waveform was amplified and phase inverted (180° shift) with respect to the input signal, thus verifying the proper functioning of the Common Source amplifier.
+    The value of the conductance parameter gm was obtained from theoretical calculations as:
+    gm ​= 1.2820mS
+    Av = 5.128
+    Gain = 14.1989
+    Analysis by AC revealed that the amplifier has a single-pole response.
+    The theoretical bandwidth was given by the equation:
+    BW = 79.577MHz
+    The −3 dB frequency corresponds to the point where gain reduces from: 5.128 to 4.195
+    The unity gain bandwidth was approximately:
+        UGB = 377.487MHz
+INFERENCE
+
+    The experimental data is in close agreement with the theoretical values, thus verifying the design methodology of the NMOS Common Source Amplifier.
+    DC analysis has shown that the desired drain current of about 150 µA was obtained by varying the width of the transistor to:
+    𝑊=15.1𝜇𝑚
+    and that the midpoint biasing was also correct.
+    Transient analysis has shown the linear amplification of the signal with 180° phase reversal, thus verifying the correct operation of the Common Source circuit.
+    AC analysis has shown that the circuit behaves as expected, with a single pole response and a mid-band gain of about 4.7195 dB and a bandwidth of about  79.577 MHz for a load capacitance of 0.5 pF.
+    The small difference between the theoretical and simulated results is due to the short-channel effects and non-idealities in the TSMC 180 nm BSIM model.
+    The designed NMOS CS amplifier meets the specified power requirement and shows stable gain and bandwidth characteristics, thus verifying its suitability for low-voltage analog circuits.
