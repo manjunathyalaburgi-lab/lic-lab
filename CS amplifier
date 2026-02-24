@@ -172,7 +172,7 @@ TRANSIENT ANALYSIS:
     -Voltage gain
     -Phase reversal
     -Signal distortion (if any)
-![Image description](https://github.com/manjunathyalaburgi-lab/lic-lab/commit/9a5fe8bd80dd7dbe9c204d5a853e7c032d0790f7)
+![Image description](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/Transient.png)
 1. Theoretical Voltage Gain
     Voltage gain of a Common Source amplifier:
     Av ​= −gm​RD
@@ -191,21 +191,21 @@ TRANSIENT ANALYSIS:
 
     Simulation Gain (From WaveForm)
     From transient simulation:
-    input p-p = 19. mV
+    input p-p = 19.987 mV
     Output p-p = 102.588 mV
     Voltage gain:
     Av = Vout / Vin
-    Av = 16.662 / 3.153
-    Av = 5.2844
+    Av = 102.588 / 19.987
+    Av = 5.134
 
     Gain in dB:
     Gain(dB) = 20log10​(Av​)
-    Gain(dB) = 20log10​(5.2844)
-    Gain(dB) = 14.4592
+    Gain(dB) = 20log10​(5.134)
+    Gain(dB) = 14.2091
 
     Comparison
     Theoretical Gain = 14.1989 dB
-    Simulation Gain = 14.4592 dB
+    Simulation Gain = 14.2091 dB
     The slight difference occurs due to:
     • Channel length modulation
     • Short channel effects
@@ -214,7 +214,7 @@ TRANSIENT ANALYSIS:
 AC ANALYSIS – GAIN AND BANDWIDTH:
     The AC analysis is carried out to identify the frequency response of the NMOS Common Source Amplifier. The mid-band gain can be extracted from the flat region of the response,
     and the bandwidth is calculated using the −3 dB frequency from the AC magnitude response.
-![Image description](https://github.com/manjunathyalaburgi-lab/lic-lab/commit/9a5fe8bd80dd7dbe9c204d5a853e7c032d0790f7)
+![Image description](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/AC%20analysis.png)
 
     A.Mid Band Gain
     From the flat portion of the AC magnitude plot:
