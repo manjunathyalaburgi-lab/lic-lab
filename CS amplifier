@@ -183,7 +183,7 @@ TRANSIENT ANALYSIS:
     Gain Calculation:
       RD = 4k
       Av = - 1.2820e-3 * 4e3
-      Av = 5.128
+      Av = 5.128 V/V
     Gain in dB:
     Gain(dB) = 20log10​(Av​)
     Gain(dB) = 20log10​(5.128)
@@ -196,7 +196,7 @@ TRANSIENT ANALYSIS:
     Voltage gain:
     Av = Vout / Vin
     Av = 102.588 / 19.987
-    Av = 5.134
+    Av = 5.134 V/V
 
     Gain in dB:
     Gain(dB) = 20log10​(Av​)
@@ -222,7 +222,7 @@ AC ANALYSIS – GAIN AND BANDWIDTH:
     Convert to linear scale:
     Av = 10^(Gain(dB)/20)
     Av = 10^(13.478/20)
-    Av = 4.7195
+    Av = 4.7195 V/V
 
     B.Theoritical Bandwidth
     The theoretical bandwidth of a single-pole amplifier is given by:
@@ -235,7 +235,7 @@ AC ANALYSIS – GAIN AND BANDWIDTH:
 
     C.Simulation Bandwidth
     From the AC response plot, the −3 dB cutoff frequency is observed at:
-    BW_simulation ≈ 81.599 MHz
+    BW simulation ≈ 81.599 MHz
     This frequency corresponds to the point where the gain drops by 3 dB from the
     mid-band value.
 
