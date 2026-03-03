@@ -1,0 +1,91 @@
+EXPERIMENT:
+CHARACTERISTICS AND PARAMETERS OF AN OP-AMP:
+AIM:
+To experimentally determine the important practical parameters of an operational amplifier, namely:
+1) Input Bias Current
+  -Inverting Input Bias Current
+  -Non-Inverting Input Bias Current
+2) Input Offset Current
+3) Input Offset Voltage
+4) Slew Rate
+
+APPARATUS REQUIRED:
+  Operational Amplifier (e.g., IC 741)
+  DC Power Supply (±15 V)
+  Resistors
+  Function Generator
+  CRO 
+  Multimeter
+  Connecting Wires
+
+THEORY:
+An operational amplifier (op-amp) is ideally assumed to have infinite input impedance, zero input current, and zero offset voltage. 
+However, in real-world devices, small internal transistor mismatches and biasing currents cause measurable imperfections.
+These non-ideal parameters influence precision circuit performance, especially in low-signal and high-frequency applications.
+Understanding these parameters helps in selecting suitable op-amps for practical circuit design.
+
+1. INPUT BIAS CURRENT
+  In a practical op-amp, a small DC current flows into both input terminals. This occurs because the input stage uses bipolar transistors that require base current for operation.
+  The input bias current is defined as the average of the currents entering the inverting and non-inverting terminals:
+    IB = (IB1 + IB2)/2
+    
+  (a) Measurement of Inverting Input Bias Current
+    Procedure:
+  Configure the op-amp in inverting mode.
+  Ground the non-inverting input terminal.
+  Connect a known high-value resistor to the inverting input.
+  Keep the input voltage zero.
+  Measure the output voltage using a voltmeter.
+  Calculate the inverting input bias current using:
+                                                  IB1 = Vo/Rf
+                                                   Rf = 470kohm
+                                                      = 0.024/470 e^3
+                                                      = 0.0510 uA
+  ![Image description](PASTE_FILENAME_HERE)
+
+  (b) Measurement of Non-Inverting Input Bias Current
+    Procedure:
+    Configure the op-amp in non-inverting configuration.
+    Ground the inverting terminal.
+    Connect a high-value resistor to the non-inverting input.
+    With zero input voltage, measure the output voltage.
+    Calculate:
+              IB2 = Vo/R1
+              R1 = 470kohm
+                 = -0.020/470 e^3
+                 = 0.04255 uA
+  ![Image description](PASTE_FILENAME_HERE)
+
+     IB = (IB1 + IB2)/2
+        = (0.0510 e^3 + 0.0425 e^3) / 2
+        = 46.75A
+
+2. INPUT OFFSET CURRENT:
+    Input offset current arises due to unequal bias currents at the two input terminals.
+    It is defined as the absolute difference between the input bias currents:
+    Iio = Vo/Rf (Rf = 470k)
+        = 0.003/470 e^3
+        = 0.0063 uA
+  ![Image description](PASTE_FILENAME_HERE)
+
+3. INPUT OFFSET VOLTAGE:
+    In an ideal op-amp, the output is zero when both inputs are grounded. However, due to internal mismatches, a small differential voltage is required between inputs to make output zero.
+    This small voltage is called Input Offset Voltage.
+    Measurement Procedure:
+    Short both inputs together.
+    Configure the op-amp with a high closed-loop gain.
+    Measure the output voltage.
+    Calculate offset voltage using:
+      Vio = (Vo - IioRf)/(1+Rf/Ri)
+            vo=0.106
+            Ri=R1=100ohm
+            Rf=470k
+            Iio=0.051uA
+    = (0.106 - 0.021 e^-6(10k)) / (1+(10k/100))
+    = 1.048 mV
+
+  4. SLEW RATE:
+      Slew rate indicates how quickly the output voltage can change in response to a fast-changing input.
+      It is defined as:
+                    S.R = 2πfmaxVm/e^6   V/μs
+      
