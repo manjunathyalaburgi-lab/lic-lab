@@ -1,0 +1,108 @@
+EXPERIMENT 2
+
+AIM:
+To design and simulate a Common Source (CS) amplifier with an active load using 180 nm CMOS technology, and to analyze the performance of the circuit using:
+
+1)DC Operating Point Analysis
+2)Transient Analysis
+3)AC Small Signal Analysis
+
+using LTspice simulation tool
+GIVEN: 
+VDD ​= 1.2V
+P <= 0.4mW
+CL ​= 0.5pF
+Ln ​= 360nm
+
+DC ANALYSIS:
+DC analysis is carried out to determine the operating point (Q-point) of the MOS transistors in the Common Source amplifier with active load. 
+Establishing a proper DC bias is important because it ensures that the transistors operate in the saturation region, which is necessary for linear amplification.
+
+In LTspice, the DC operating point is obtained using the .op command, which calculates all node voltages and device currents when the circuit reaches steady state.
+
+This analysis helps in:
+  Determining the drain current of the MOS transistors
+  Verifying that the devices operate in the saturation region
+  Observing the output voltage level
+  Confirming that the circuit satisfies the power constraints
+
+Determination of Drain Current:
+The maximum allowable drain current is determined from the given power constraint.
+  P = VDD​×ID
+  ID ​= P / VDD
+  ID​ = 0.4×10^−3 / 1.2
+  ID​ = 333.3uA
+To maintain a safety margin and prevent exceeding the power limit, the drain current is selected as
+  ID = 150uA
+
+NMOS Transistor Design (M1):
+Vout = VDD / 2 + IDRs    (VRS = IDRs = 0.2V)
+     = 1.2 / 2 + 0.2
+     = 0.8V
+Rs = VRS / ID  =  0.2 / 150e^-6
+   = 1333.33ohm
+
+VB1 = VGS1 + IDRs
+Assume VOV = 0.25V  , Vth = 0.36V
+    VOV = VGS1 - 0.36
+    VGS = 0.61V
+VB1 = 0.61 + 0.2
+    = 0.81V
+
+check for the saturation condition:
+    VDS >= VGS1 - VTH
+    0.6 > 0.25
+Saturation region satisfied for M1 (NMOS)
+
+For the NMOS transistor operating in saturation, the drain current is given by
+    ID = 1/2(kn'(W/L)(VGS - VT)e2)
+    W = 2IDL / UnCox(VGS - VT)²
+NOW, kn' = UnCox
+    = Un*epsilon/tox
+    = 273.809e-4*epsilon0*3.9/4.1e-9
+    = 2.306e-4
+VOV ​= 0.25V
+the width of the NMOS transistor is calculated. From the design calculations
+  WM1 = 3.750um
+
+PMOS Active Load Design (M2):
+
+VOV = 0.25V
+|VTH| = 0.3920V
+
+VOV = VSG - |VTH|
+VSG >> VOV + VTH
+       0.25 + 0.39
+       0.64V
+
+VSG = VS - VG
+VG = VS - VSG
+   = 1.2 - 0.64
+VG = 0.54
+
+the width of the PMOS transistor is calculated. From the design calculations
+    ID = 1/2(kn'(W/L)(VGS - VT)e2)
+    W = 2IDL / UnCox(VGS - VT)²
+NOW, kn' = UnCox
+         = Un*epsilon/tox
+      Un = 115.4e^-4
+     kn' = 9.735e^-5
+
+W = 17.75 um
+
+![Image description](PASTE_FILENAME_HERE)
+
+DC Operating Point from Simulation:
+
+The DC operating point was verified using the .op command in LTspice.
+The obtained simulation results are:
+    FOR WIDTH 
+    WM1 = 39um
+    WM2 = 44um
+    ID = 150.808uA
+    Vout = 0.80592V
+
+
+
+
+​​​​
