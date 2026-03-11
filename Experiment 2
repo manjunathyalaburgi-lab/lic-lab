@@ -94,6 +94,9 @@ W = 17.75 um
 
 DC Operating Point from Simulation:
 
+DC analysis is performed to determine the operating point (Q-point) of the MOS transistors used in the Common Source amplifier with an active load. 
+The main objective of this analysis is to ensure that both the NMOS transistor (M1) and the PMOS transistor (M2) operate in the saturation region, which is necessary for proper amplification.
+
 The DC operating point was verified using the .op command in LTspice.
 The obtained simulation results are:
     FOR WIDTH 
