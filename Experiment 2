@@ -107,8 +107,91 @@ The obtained simulation results are:
 
 ![Image description](PASTE_FILENAME_HERE)
 
+TRANSIENT ANALYSIS:
+
+Transient analysis is performed to observe the time-domain behavior of the amplifier when a time-varying input signal is applied. 
+This analysis helps in understanding how the circuit responds to real signals and verifies whether the amplifier provides proper signal amplification
+
+The transient simulation was carried out in LTspice using the command:.tran 5m
+
+A sinusoidal input signal with a small amplitude was applied to the gate of the NMOS transistor. 
+The input signal used in the simulation had the following parameters:
+Frequency = 1 kHz
+Peak amplitude = 10 mV
+Peak-to-peak input voltage = 20 mV
+The transient response of the circuit shows that the output waveform is amplified and inverted with respect to the input signal, which is the expected behavior of a Common Source amplifier.
+
+Gain Calculation from Transient Simulation:
+From the waveform obtained in LTspice:
+Vout(p-p) = 918.387 mV − 659.873 mV
+Vout(p-p) = 225.514 mV
+
+Input peak-to-peak voltage:
+Vin(p-p) = 20 mV
+
+Voltage gain:
+
+Av = Vout / Vin
+Av = 225.514 / 20
+Av = 11.2757
+
+Gain in decibels:
+
+Gain(dB) = 20 log10(Av)
+Gain(dB) = 20 log10(11.2757)
+Gain(dB) ≈ 21.04 dB
+
+Thus, the transient analysis confirms that the circuit provides significant voltage amplification with phase inversion, 
+validating the operation of the Common Source amplifier.
 
 
+AC ANALYSIS:
+
+AC analysis is performed to study the frequency response of the amplifier. 
+It helps determine important parameters such as mid-band gain, bandwidth, and the −3 dB cutoff frequency.
+In LTspice, AC analysis was carried out using the command: .ac dec 100 0.1 100G
+This command sweeps the frequency across a wide range and plots the gain of the amplifier in decibels (dB).
+
+Mid-Band Gain
+
+From the flat region of the AC magnitude plot, the gain of the amplifier is approximately:
+Gain ≈ 19.11 dB
+This represents the mid-band gain where the amplifier provides maximum amplification.
+
+Bandwidth Calculation:
+The bandwidth of the amplifier is determined from the −3 dB point of the gain curve.
+
+From the AC response plot:
+Bandwidth = 99.10 MHz
+This frequency corresponds to the point where the gain drops by 3 dB from the mid-band value.
+
+Interpretation:
+The AC analysis shows that the amplifier maintains a relatively constant gain across the mid-frequency region and begins to decrease at higher frequencies due to parasitic capacitances and device limitations.
+
+The obtained bandwidth indicates that the amplifier can operate effectively over a wide range of frequencies, making it suitable for high-speed analog applications.
+
+RESULT:
+
+The Common Source amplifier with an active PMOS load was successfully designed and simulated using 180 nm CMOS technology in LTspice. 
+The DC operating point analysis confirmed that the NMOS and PMOS transistors operate in the saturation region, ensuring proper biasing of the amplifier. The simulated drain current was approximately 150.8 µA, and the output voltage was observed to be around 0.806 V, which closely matches the calculated theoretical values.
+
+Transient analysis showed that the output signal was amplified and inverted with respect to the input signal, 
+verifying the expected behavior of a Common Source amplifier. From the transient waveform, the voltage gain was calculated to be approximately 11.27 V/V, corresponding to about 21.04 dB.
+
+AC analysis was performed to study the frequency response of the circuit. The mid-band gain obtained from the AC magnitude plot was approximately 19.11 dB. 
+The −3 dB bandwidth of the amplifier was observed to be around 99.10 MHz, indicating that the amplifier can operate effectively over a wide range of frequencies.
+
+Overall, the simulation results are in good agreement with the theoretical design calculations.
 
 
+INFERENCE
+
+From this experiment, the design and performance of a Common Source amplifier using CMOS technology were studied and verified through simulation. 
+The DC analysis ensured that the MOS transistors were correctly biased in the saturation region, which is essential for linear amplification.
+
+The transient analysis confirmed that the amplifier provides voltage gain with a 180° phase inversion,
+which is a characteristic feature of the Common Source configuration. The AC analysis demonstrated the frequency response of the circuit and showed that the amplifier achieves a stable gain and a wide bandwidth.
+
+The close agreement between theoretical calculations and LTspice simulation results validates the design methodology used for the amplifier. 
+This experiment demonstrates the practical implementation of MOSFET amplifiers and highlights their importance in analog integrated circuit design.
 ​​​​
