@@ -209,7 +209,113 @@ Design Specifications:
 
 Design Calculations:
 Drain Current:
+P = VDD ​⋅ ID
+ID ​= 0.4 * 10−3 / 1.2
+   = 333.33uA
+Choosen ID = 150uA
+
+Output Voltage:
+Vout​ = VDD / 2​ ​+ VDS
+Vout ​= 0.6 + 0.3 = 0.9V
+
+PMOS Bias Voltage:
+VSG ​= Vov​ + ∣VT​∣ 
+    = 0.25 + 0.39
+    = 0.64V
+VB1 ​= 1.2 − 0.64
+    =0.56V
+
+NMOS Bias Voltage:
+VGS​ = Vov​ + VT​ 
+    = 0.25 + 0.36
+    = 0.61V​​​
+VB2​ = 0.61 + 0.3
+    = 0.91V
+
+For NMOS width is:
+ID​ = 1/2 ​k′ W/L ​Vov2​​​​​
+Wn ​= ​2ID​L / kn′​Vov2
+Wn = 3.750um
+
+For PMOS width is:
+ID​ = 1/2 ​k′ W/L ​Vov2
+Wn ​= ​2ID​L / kn′​Vov2
+Wn = 17.75um
 
 
+DC Analysis:
+The DC analysis is performed to verify the operating point of the circuit and ensure that all transistors are functioning in the saturation region.
+Using Calculated Widths:
+Wn ​= 3.75μm
+Wp ​= 17.75μm
+L = 360nm
 
-​​​​
+| Parameter                  | Value      |
+
+| Drain Current ( I_D )      | 111.903 µA |
+| Output Voltage ( V_{out} ) | 0.950 V    |
+
+Observation:
+
+The obtained current (111.903 µA) is lower than the desired value (150 µA).
+The output voltage is slightly higher than the designed value (~0.9 V).
+This deviation occurs due to:
+    Channel length modulation
+    Model inaccuracies
+    Non-ideal device behavior
+
+After Width Adjustment:
+Wn = 5.1μm
+𝑊𝑝 = 23.35 𝜇𝑚
+
+| Parameter                  | Value      |
+
+| Drain Current ( I_D )      | 150.829 µA |
+| Output Voltage ( V_{out} ) | 0.902 V    |
+
+Observation
+
+The drain current is now very close to the target value (150 µA).
+The output voltage (0.902 V) matches the expected design (~0.9 V).
+This confirms that the circuit is properly biased.
+
+Transient Analysis:
+Output:
+Vmax​=962.596mV
+Vmin​=804.160mV
+Vout(pp)​=158.436mV
+
+Input:
+Vin(pp)​=20mV
+
+Gain:
+Av​=158.436 / 20 
+  ​=7.921 V/V
+
+Av​(dB) = 20log(7.921)
+        =17.97dB
+
+AC Analysis:
+| Parameter  | Value       |
+
+| Gain       | 17.84 dB    |
+| -3 dB Gain | 14.84 dB    |
+| Bandwidth  | 546.867 MHz |
+| UGB        | 4.535 GHz   |
+
+Result
+
+The Common Source (CS) amplifier with active load and current source was successfully designed and analyzed.
+The circuit achieves a voltage gain of approximately 18 dB, which is characteristic of CS amplifiers due to their high transconductance and output resistance.
+The bandwidth obtained is around 546 MHz, indicating good high-frequency performance.
+The DC operating point is achieved at:
+ID = 150.829μA
+Vout​=0.902V
+
+This confirms that all MOS transistors are operating in the saturation region, which is essential for proper amplification.
+
+INFERENCE:
+The CMOS amplifier was successfully designed and analyzed using LTspice.
+DC analysis confirmed correct biasing in the saturation region. Transient analysis verified signal amplification,
+while AC analysis revealed wide bandwidth but slightly reduced gain due to source degeneration.
+Differences between theoretical and simulated values arise from non-ideal transistor effects such as channel length modulation, parasitic capacitances, and mobility degradation in the TSMC 180 nm model.
