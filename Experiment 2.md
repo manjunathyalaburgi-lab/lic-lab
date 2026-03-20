@@ -290,30 +290,46 @@ This confirms that the circuit is properly biased.
 
 
 Transient Analysis:
+Transient analysis is performed to study the time-domain response of the Common Source amplifier when a time-varying input signal is applied.
+
+In this analysis, a sinusoidal input signal is applied at the gate of the NMOS transistor (M1), and the corresponding output is observed at the drain. Since the circuit is a CS amplifier, the output is expected to be amplified and inverted.
+
 Output:
+From the simulation results:
 Vmax​=962.596mV
 Vmin​=804.160mV
 Vout(pp)​=158.436mV
 
 Input:
-Vin(pp)​=20mV
+Vin(pp)​ = 20mV
 
 Gain:
 Av​=158.436 / 20 
   ​=7.921 V/V
 
+The gain in decibels is:
 Av​(dB) = 20log(7.921)
         =17.97dB
 ![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/circuit%202%20transient%20Vout%2B.png)
 ![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/circuit%202%20transient%20Vin%2B.png)
 
 AC Analysis:
-| Parameter  | Value       |
+AC analysis is performed to determine the frequency response of the amplifier and to evaluate its performance over a range of frequencies.
 
-| Gain       | 17.84 dB    |
-| -3 dB Gain | 14.84 dB    |
-| Bandwidth  | 546.867 MHz |
-| UGB        | 4.535 GHz   |
+In this analysis, a small-signal AC input is applied, and the gain is measured as a function of frequency. The mid-band gain remains approximately constant, while at higher frequencies, the gain decreases due to the effect of parasitic capacitances present in the MOS transistors.
+From the simulation results:
+Mid-band gain:
+Av​=17.84dB
+
+The -3 dB gain is calculated as:
+Av(−3dB)=17.84−3=14.84dB
+
+The corresponding cutoff frequency is observed as:
+fc=546.867MHz
+Thus, the bandwidth of the amplifier is approximately:
+BW=546.867MHz
+The Unity Gain Bandwidth (UGB), which is the frequency at which gain becomes 0 dB, is found to be:
+UGB=4.535GHz
 ![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/circuit2%20ac%20.png)
 ![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/circuit%202%20-3dB.png)
 
