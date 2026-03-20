@@ -245,7 +245,7 @@ For PMOS width is:
 ID​ = 1/2 ​k′ W/L ​Vov2
 Wn ​= ​2ID​L / kn′​Vov2
 Wn = 17.75um
-
+![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/circuit%202%20daigram.png)
 
 DC Analysis:
 The DC analysis is performed to verify the operating point of the circuit and ensure that all transistors are functioning in the saturation region.
@@ -282,6 +282,8 @@ Observation
 The drain current is now very close to the target value (150 µA).
 The output voltage (0.902 V) matches the expected design (~0.9 V).
 This confirms that the circuit is properly biased.
+![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/circuit%202%20dc%20analysis.png)
+
 
 Transient Analysis:
 Output:
@@ -298,6 +300,8 @@ Av​=158.436 / 20
 
 Av​(dB) = 20log(7.921)
         =17.97dB
+![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/circuit%202%20transient%20Vout%2B.png)
+![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/circuit%202%20transient%20Vin%2B.png)
 
 AC Analysis:
 | Parameter  | Value       |
@@ -306,8 +310,11 @@ AC Analysis:
 | -3 dB Gain | 14.84 dB    |
 | Bandwidth  | 546.867 MHz |
 | UGB        | 4.535 GHz   |
+![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/circuit2%20ac%20.png)
+![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/circuit%202%20-3dB.png)
 
-Result
+
+Result:
 
 The Common Source (CS) amplifier with active load and current source was successfully designed and analyzed.
 The circuit achieves a voltage gain of approximately 18 dB, which is characteristic of CS amplifiers due to their high transconductance and output resistance.
