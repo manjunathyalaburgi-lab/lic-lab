@@ -90,7 +90,7 @@ NOW, kn' = UnCox
 
 W = 17.75 um
 
-![Image description](PASTE_FILENAME_HERE)
+![Circuit Diagram](circuit.png)
 
 DC Operating Point from Simulation:
 
@@ -123,8 +123,8 @@ The transient response of the circuit shows that the output waveform is amplifie
 
 Gain Calculation from Transient Simulation:
 From the waveform obtained in LTspice:
-Vout(p-p) = 918.387 mV − 659.873 mV
-Vout(p-p) = 225.514 mV
+Vout(p-p) = 913.380 mV − 659.872mV
+Vout(p-p) = 253.507 mV
 
 Input peak-to-peak voltage:
 Vin(p-p) = 20 mV
@@ -133,13 +133,13 @@ Voltage gain:
 
 Av = Vout / Vin
 Av = 225.514 / 20
-Av = 11.2757
+Av = 12.6753
 
 Gain in decibels:
 
 Gain(dB) = 20 log10(Av)
-Gain(dB) = 20 log10(11.2757)
-Gain(dB) ≈ 21.04 dB
+Gain(dB) = 20 log10(12.6753)
+Gain(dB) ≈ 22.058 dB
 
 Thus, the transient analysis confirms that the circuit provides significant voltage amplification with phase inversion, 
 validating the operation of the Common Source amplifier.
@@ -155,12 +155,12 @@ This command sweeps the frequency across a wide range and plots the gain of the 
 Mid-Band Gain
 
 From the flat region of the AC magnitude plot, the gain of the amplifier is approximately:
-Gain ≈ 19.11 dB
+Gain = 22.1149 dB
 This represents the mid-band gain where the amplifier provides maximum amplification.
 
 Bandwidth Calculation:
 The bandwidth of the amplifier is determined from the −3 dB point of the gain curve.
-
+−3 dB = 19.1149
 From the AC response plot:
 Bandwidth = 99.10 MHz
 This frequency corresponds to the point where the gain drops by 3 dB from the mid-band value.
