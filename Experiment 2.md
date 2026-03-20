@@ -199,7 +199,11 @@ The close agreement between theoretical calculations and LTspice simulation resu
 This experiment demonstrates the practical implementation of MOSFET amplifiers and highlights their importance in analog integrated circuit design.
 
 
+
+
 EXPERIMENT 2 CIRCUIT 2
+
+
 AIM:
 To design and analyze a Common Source (CS) amplifier with active load and current source, and evaluate its DC, Transient, and AC characteristics.
 
