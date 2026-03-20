@@ -90,7 +90,7 @@ NOW, kn' = UnCox
 
 W = 17.75 um
 
-![Circuit Diagram](circuit.png)
+![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/lab1%20circuit1.png)
 
 DC Operating Point from Simulation:
 
@@ -105,7 +105,7 @@ The obtained simulation results are:
     ID = 150.808uA
     Vout = 0.80592V
 
-![Image description](PASTE_FILENAME_HERE)
+![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/lab2%20circuit1%20DC.png)
 
 TRANSIENT ANALYSIS:
 
@@ -143,7 +143,8 @@ Gain(dB) ≈ 22.058 dB
 
 Thus, the transient analysis confirms that the circuit provides significant voltage amplification with phase inversion, 
 validating the operation of the Common Source amplifier.
-
+![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/lab2%20circuit1%20transient%20Vout.png)
+![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/lab2%20circuit1%20transient%20Vin.png)
 
 AC ANALYSIS:
 
@@ -169,6 +170,8 @@ Interpretation:
 The AC analysis shows that the amplifier maintains a relatively constant gain across the mid-frequency region and begins to decrease at higher frequencies due to parasitic capacitances and device limitations.
 
 The obtained bandwidth indicates that the amplifier can operate effectively over a wide range of frequencies, making it suitable for high-speed analog applications.
+![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/lab2%20circuit1%20Ac.png)
+![Circuit Diagram](https://github.com/manjunathyalaburgi-lab/lic-lab/blob/main/lab2%20circuit1%20Ac%20-3dB.png)
 
 RESULT:
 
@@ -194,6 +197,7 @@ which is a characteristic feature of the Common Source configuration. The AC ana
 
 The close agreement between theoretical calculations and LTspice simulation results validates the design methodology used for the amplifier. 
 This experiment demonstrates the practical implementation of MOSFET amplifiers and highlights their importance in analog integrated circuit design.
+
 
 EXPERIMENT 2 CIRCUIT 2
 AIM:
