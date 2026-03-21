@@ -350,3 +350,67 @@ The CMOS amplifier was successfully designed and analyzed using LTspice.
 DC analysis confirmed correct biasing in the saturation region. Transient analysis verified signal amplification,
 while AC analysis revealed wide bandwidth but slightly reduced gain due to source degeneration.
 Differences between theoretical and simulated values arise from non-ideal transistor effects such as channel length modulation, parasitic capacitances, and mobility degradation in the TSMC 180 nm model.
+
+
+Circuit 3: 
+
+AIM:
+To design and analyze a Common Source amplifier with active load and diode connected MOSFET using TSMC 180nm technology in LTSpice, and to study its DC biasing, transient response, and AC frequency characteristics.
+
+Introduction:
+The Common Source (CS) amplifier is one of the most widely used amplifier configurations in analog integrated circuit design. It provides significant voltage gain along with a phase inversion between the input and output signals.
+
+In integrated circuits, passive resistors are often replaced by MOS transistors to save chip area and improve performance. A PMOS transistor acting as an active load provides high output resistance, which helps increase the gain of the amplifier.
+
+In this circuit, a diode connected MOSFET is used to establish proper biasing conditions. This configuration helps maintain stable operating current and ensures that the transistors operate in the saturation region.
+
+The amplifier is designed under a power constraint and analyzed using DC analysis, transient analysis, and AC analysis.
+
+Circuit Daigram:
+
+<img width="1919" height="1020" alt="circuit3 diagram" src="https://github.com/user-attachments/assets/5a06588d-8317-4c91-9ba1-3251cbae6944" />
+
+Design Calculations:
+Drain Current
+ID ​= P / VDD ​​= 
+   = 0.4×10−3 / 1.2
+   ​=333.33uA
+Assume ID = 150uA
+
+Output Voltage:
+Vout ​= VDD/2 ​​+ VDS
+Vout ​= 0.6 + 0.3 
+     =0.9V
+     
+Gate Voltage Calculation:
+Vov​=0.25V , VT​=0.36V
+VGS ​= Vov ​+ VT
+    =0.61+0.3
+    =0.9V
+
+For NMOS width is:
+ID​ = 1/2 ​k′ W/L ​Vov2​​​​​
+Wn ​= ​2ID​L / kn′​Vov2
+Wn = 3.750um
+
+For PMOS width is:
+ID​ = 1/2 ​k′ W/L ​Vov2
+Wn ​= ​2ID​L / kn′​Vov2
+Wn = 17.75um
+
+DC Analysis:
+DC analysis is carried out to determine the operating point of the circuit.
+Using Calculated Widths
+Wn​=3.75μm,Wp​=17.75μm
+ID​=19.530μA
+Vout​=1.168V
+The current is much lower than expected and output is near 𝑉DD, indicating improper biasing.
+
+After Width Adjustment
+Wn​=28.9μm,Wp​=18.5μm
+ID​=150.513μA
+Vout​=0.901V
+The circuit now achieves desired current and proper operating point.
+
+<img width="851" height="637" alt="circuit3 dc analysis" src="https://github.com/user-attachments/assets/391cd9a5-8650-4ca7-abe5-eb7682298bd2" />
+​
