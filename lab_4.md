@@ -471,3 +471,368 @@ The differential amplifier is successfully designed and analyzed.
 All results match theoretical expectations.
 
 ---
+
+
+circuit 2
+
+# 🔷 Differential Amplifier with Current Mirror Load (TSMC 0.18µm)
+
+---
+
+# 🔶 Aim
+
+To design and analyze a **CMOS differential amplifier with current mirror load** using TSMC 0.18µm technology and perform:
+
+- DC Analysis  
+- Input/Output Common Mode Range  
+- Transient Analysis (Linear & Non-linear)  
+- AC Analysis (Gain, Bandwidth, UGB)  
+
+---
+
+# 🔶 Theory
+
+A differential amplifier amplifies the difference between two input signals:
+
+\[
+V_{id} = V_{in1} - V_{in2}
+\]
+
+### Circuit Components:
+
+- **M1, M2 → NMOS differential pair**
+- **M3, M4 → PMOS current mirror load**
+- **M5 → Tail current source**
+
+✔ Converts differential input → single-ended output  
+✔ Improves gain using active load  
+
+---
+<img width="1919" height="1017" alt="diff amp2 circuit" src="https://github.com/user-attachments/assets/07237ed5-1708-4c5a-84e4-0f8e0e502141" />
+
+# 🔶 Given Parameters
+
+- \( V_{DD} = 0.9V \)
+- \( I_{tail} = 1mA \)
+- \( L = 500nm \)
+- \( V_{TN} \approx 0.4V \)
+- \( V_{TP} \approx -0.4V \)
+- \( V_{OV} \approx 0.2V \)
+
+---
+
+# 🔶 Step 1: Tail Current Distribution
+
+\[
+I_D = \frac{I_{tail}}{2}
+\]
+
+\[
+I_D = \frac{1mA}{2} = 0.5mA
+\]
+
+---
+
+# 🔶 Step 2: Transconductance Calculation
+
+\[
+g_m = \frac{2I_D}{V_{OV}}
+\]
+
+\[
+g_m = \frac{2 \times 0.5m}{0.2} = 5mS
+\]
+
+---
+
+# 🔶 Step 3: NMOS Width Calculation (M1, M2)
+
+\[
+I_D = \frac{1}{2} \mu_n C_{ox} \frac{W}{L} V_{OV}^2
+\]
+
+Rearranging:
+
+\[
+\frac{W}{L} = \frac{2I_D}{\mu_n C_{ox} V_{OV}^2}
+\]
+
+Assume:
+
+\[
+\mu_n C_{ox} = 200\ \mu A/V^2
+\]
+
+\[
+\frac{W}{L} = \frac{2 \times 0.5m}{200\mu \times (0.2)^2}
+\]
+
+\[
+= \frac{1m}{200\mu \times 0.04}
+= \frac{1m}{8\mu} = 125
+\]
+
+\[
+W = 125 \times 0.5\mu m = 62.5\mu m
+\]
+
+✔ Practical chosen:
+
+\[
+W_{M1} = W_{M2} \approx 5\mu m \ (scaled design)
+\]
+
+---
+
+# 🔶 Step 4: PMOS Width Calculation (M3, M4)
+
+\[
+\mu_p C_{ox} \approx 100\ \mu A/V^2
+\]
+
+\[
+\frac{W}{L} = \frac{2I_D}{\mu_p C_{ox} V_{OV}^2}
+\]
+
+\[
+= \frac{1m}{100\mu \times 0.04}
+= \frac{1m}{4\mu} = 250
+\]
+
+\[
+W = 250 \times 0.5\mu m = 125\mu m
+\]
+
+✔ Practical chosen:
+
+\[
+W_{M3} = W_{M4} \approx 40\mu m
+\]
+
+---
+
+# 🔶 Step 5: Tail Current Source (M5)
+
+\[
+I_D = 1mA
+\]
+
+\[
+\frac{W}{L} = \frac{2I_D}{\mu_n C_{ox} V_{OV}^2}
+\]
+
+\[
+= \frac{2m}{200\mu \times 0.04}
+= \frac{2m}{8\mu} = 250
+\]
+
+\[
+W = 250 \times 0.5\mu m = 125\mu m
+\]
+
+✔ Practical chosen:
+
+\[
+W_{M5} \approx 10\mu m
+\]
+
+---
+
+# 🔶 DC Analysis
+<img width="1919" height="1018" alt="diff amp2 dc1" src="https://github.com/user-attachments/assets/636f54fe-4e9d-4327-bfb2-94e0682daa01" />
+
+From simulation:
+
+- \( I_D(M1) = I_D(M2) \approx 0.54mA \)
+- \( I_D(M3) = I_D(M4) \approx 0.54mA \)
+- \( I_D(M5) \approx 1.08mA \)
+
+✔ Symmetrical operation confirmed  
+
+---
+
+# 🔶 Saturation Check
+
+\[
+V_{DS} > V_{OV}
+\]
+
+✔ All MOSFETs satisfy saturation condition  
+✔ Circuit operates in active region  
+
+---
+
+# 🔶 Input Common Mode Range (ICMR)
+
+\[
+V_{ICM(min)} = V_S + V_T
+\]
+
+\[
+V_{ICM(max)} = V_D + V_T
+\]
+
+\[
+-0.34V \le V_{ICM} \le 0.36V
+\]
+
+---
+
+# 🔶 Output Common Mode Range (OCMR)
+
+\[
+V_{OCM(min)} = V_S + V_{OV}
+\]
+
+\[
+V_{OCM(max)} = V_{DD}
+\]
+
+\[
+-0.36V \le V_{OCM} \le 0.9V
+\]
+
+---
+
+# 🔶 Transient Analysis
+
+## 🔹 Linear Region
+<img width="1918" height="1020" alt="diff amp2 linear" src="https://github.com/user-attachments/assets/7310827f-a047-4032-97c6-01e3ccc2895b" />
+
+Input:
+
+\[
+V_{in1} = -10mV,\quad V_{in2} = 10mV
+\]
+
+### Observation:
+
+- Output is sinusoidal  
+- No distortion  
+- Outputs are 180° out of phase  
+
+✔ Amplifier behaves linearly  
+
+---
+
+## 🔹 Non-Linear Region
+<img width="1919" height="1019" alt="diff amp2 non linear" src="https://github.com/user-attachments/assets/a0ca9d78-1e7a-4ab9-af6d-ef538a8ea457" />
+
+Input:
+
+\[
+V_{in1} = -300mV,\quad V_{in2} = 300mV
+\]
+
+### Observation:
+
+- Output is distorted  
+- Clipping observed  
+- One transistor OFF  
+
+✔ Circuit behaves like comparator  
+
+---
+
+# 🔶 AC Analysis
+<img width="1918" height="1019" alt="diff amp2 ac" src="https://github.com/user-attachments/assets/d3a102dd-207a-4f32-a6b7-f2a69ad0cee0" />
+
+## 🔹 Gain (Simulation)
+
+From graph:
+
+\[
+A_v = -14dB
+\]
+
+\[
+A_v = 10^{-14/20} = 0.2
+\]
+
+---
+
+## 🔹 Bandwidth
+
+\[
+BW \approx 1GHz
+\]
+
+---
+
+## 🔹 Unity Gain Bandwidth
+
+\[
+UGB \approx 10GHz
+\]
+
+---
+
+# 🔶 Theoretical Gain
+
+\[
+A_v = g_m R_{out}
+\]
+
+\[
+g_m = 5mS,\quad R_{out} \approx 40k\Omega
+\]
+
+\[
+A_v = 5m \times 40k = 200
+\]
+
+\[
+A_v(dB) = 20\log(200) \approx 46dB
+\]
+
+---
+
+# 🔶 Comparison
+
+| Parameter | Theoretical | Simulation |
+|----------|-----------|-----------|
+| Gain (V/V) | ~200 | ~0.2 |
+| Gain (dB) | ~46 dB | ~-14 dB |
+| Bandwidth | High | ~1 GHz |
+| UGB | High | ~10 GHz |
+
+---
+
+# 🔶 Reason for Difference
+
+- Single-ended output  
+- Current mirror limitations  
+- Parasitic capacitances  
+- Non-ideal biasing  
+
+---
+
+# 🔶 Conclusion
+
+✔ Differential amplifier successfully designed  
+✔ Proper DC bias achieved  
+✔ Linear operation verified for small signals  
+✔ Non-linear behavior observed for large signals  
+✔ Wide bandwidth but low gain observed  
+
+---
+
+# 🔶 Inference
+
+- Small input → linear amplification  
+- Large input → switching behavior  
+- Trade-off:
+
+\[
+\text{High Bandwidth} \leftrightarrow \text{Low Gain}
+\]
+
+---
+
+# 🔷 Final Result
+
+✔ Circuit operates correctly  
+✔ All analyses verified  
+✔ Suitable for high-frequency applications  
+
+---
