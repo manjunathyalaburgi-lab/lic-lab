@@ -836,3 +836,374 @@ A_v(dB) = 20\log(200) \approx 46dB
 ✔ Suitable for high-frequency applications  
 
 ---
+
+
+CIRCUIT 3
+# Differential Amplifier – Circuit 3 (Active Load with Tail Current Source)
+
+---
+
+## 🔷 AIM
+
+To design and analyze a CMOS differential amplifier with active load using LTspice and evaluate:
+
+- DC Operating Point  
+- Device sizing (W/L)  
+- ICMR & OCMR  
+- Differential input range  
+- Transient response (linear & non-linear)  
+- AC response (gain, bandwidth, UGB)
+
+---
+
+## 🔷 THEORY
+
+A differential amplifier amplifies the difference between two input signals.
+
+- M1, M2 → NMOS differential pair  
+- M3, M4 → PMOS active load  
+- M5 → Tail current source  
+
+### Key Relations:
+
+\[
+I_D = \frac{1}{2} \mu_n C_{ox} \frac{W}{L} V_{OV}^2
+\]
+
+\[
+g_m = \frac{2I_D}{V_{OV}}
+\]
+
+\[
+A_v = g_m \cdot R_{out}
+\]
+
+---
+
+## 🔷 GIVEN PARAMETERS
+
+| Parameter | Value |
+|----------|------|
+| \( V_{DD} \) | 0.9 V |
+| Tail current \( I_{tail} \) | 0.4 mA |
+| \( L \) | 500 nm |
+| NMOS Width | 5 µm |
+| PMOS Width | 40 µm |
+
+---
+<img width="1919" height="1016" alt="diff amp3 circuit" src="https://github.com/user-attachments/assets/cadd8a73-f597-44d4-add6-92c39e2cdb5a" />
+
+## 🔷 DESIGN CALCULATIONS
+
+### 1. Tail Current Splitting
+
+\[
+I_D(M1) = I_D(M2) = \frac{I_{tail}}{2}
+\]
+
+\[
+I_D = \frac{0.4mA}{2} = 0.2mA
+\]
+
+---
+
+### 2. Overdrive Voltage
+
+\[
+V_{OV} = \sqrt{\frac{2I_D}{\mu_n C_{ox} (W/L)}}
+\]
+
+(Using process parameters → approximate)
+
+\[
+V_{OV} \approx 0.2V
+\]
+
+---
+
+### 3. Transconductance
+
+\[
+g_m = \frac{2I_D}{V_{OV}
+}
+\]
+
+\[
+g_m = \frac{2 \times 0.2mA}{0.2} = 2mS
+\]
+
+---
+
+### 4. Output Resistance
+
+\[
+R_{out} \approx \frac{1}{\lambda I_D}
+\]
+
+(Assuming \( \lambda \approx 0.02 \))
+
+\[
+R_{out} \approx \frac{1}{0.02 \times 0.2mA} = 250k\Omega
+\]
+
+---
+
+### 5. Theoretical Gain
+
+\[
+A_v = g_m \cdot R_{out}
+\]
+
+\[
+A_v = 2mS \times 250k = 500
+\]
+
+⚠️ Practical gain is much smaller due to limitations.
+
+---
+
+## 🔷 DC ANALYSIS
+<img width="1919" height="1014" alt="diff amp3 dc" src="https://github.com/user-attachments/assets/4f9b9e6d-66be-4028-96dc-12ca3eabc92f" />
+
+### From LTspice:
+
+- \( I_D(M1) = I_D(M2) \approx 0.2008mA \)
+- \( I_D(M5) \approx 0.4017mA \)
+
+---
+
+### ✅ Verification:
+
+\[
+I_{tail} = I_1 + I_2
+\]
+
+\[
+0.4017 \approx 0.2008 + 0.2008
+\]
+
+✔ Correct
+
+---
+
+## 🔷 SATURATION CHECK
+
+Condition:
+
+\[
+V_{DS} > V_{OV}
+\]
+
+All MOSFETs satisfy this → ✔ Saturation region
+
+---
+
+## 🔷 INPUT COMMON MODE RANGE (ICMR)
+
+\[
+V_{ICM(min)} = V_S + V_T
+\]
+
+\[
+V_{ICM(max)} = V_D + V_T
+\]
+
+(From previous calculation)
+
+\[
+-0.34V \le V_{ICM} \le 0.36V
+\]
+
+---
+
+## 🔷 OUTPUT COMMON MODE RANGE (OCMR)
+
+\[
+V_{OCM(min)} = V_S + V_{OV}
+\]
+
+\[
+V_{OCM(max)} = V_{DD}
+\]
+
+\[
+-0.36V \le V_{OCM} \le 0.9V
+\]
+
+---
+
+## 🔷 DIFFERENTIAL INPUT RANGE
+
+\[
+V_{id(max)} \approx 2V_{OV}
+\]
+
+\[
+V_{id(max)} \approx 0.4V
+\]
+
+---
+
+# 🔷 TRANSIENT ANALYSIS
+
+---
+
+## 🔹 Case 1: Small Signal (Linear Region)
+<img width="1919" height="1026" alt="diff amp3 linear" src="https://github.com/user-attachments/assets/9096f090-8a07-4f60-afa6-9c6c6a0dae14" />
+
+### Input:
+\[
+V_{in} = 10mV
+\]
+
+### Output:
+
+\[
+V_{out(pp)} = 0.65mV
+\]
+
+\[
+V_{out} = 0.325mV
+\]
+
+---
+
+### Gain:
+
+\[
+A_v = \frac{0.325}{10} = 0.0325
+\]
+
+\[
+A_v(dB) = 20\log(0.0325) \approx -29.7dB
+\]
+
+---
+
+### Observation:
+
+- Output is sinusoidal  
+- No distortion  
+- Linear operation  
+
+---
+
+## 🔹 Case 2: Large Signal (Non-Linear Region)
+<img width="1919" height="1011" alt="diff amp3 non linear" src="https://github.com/user-attachments/assets/30056246-98da-4ad3-b7c4-80bcf8569cf6" />
+
+### Input:
+\[
+V_{in} = 300mV
+\]
+
+### Output:
+
+\[
+V_{out(pp)} = 60mV
+\]
+
+\[
+V_{out} = 30mV
+\]
+
+---
+
+### Gain:
+
+\[
+A_v = \frac{30}{300} = 0.1
+\]
+
+\[
+A_v(dB) = -20dB
+\]
+
+---
+
+### Observation:
+
+- Output compressed  
+- Distortion present  
+- Non-linear behavior  
+
+---
+
+## 🔷 LINEAR vs NON-LINEAR
+
+| Condition | Behavior |
+|----------|--------|
+| Small input | Linear |
+| Large input | Non-linear |
+| Gain | Constant → Variable |
+| Output | Clean → Distorted |
+
+---
+
+# 🔷 AC ANALYSIS
+<img width="1914" height="1020" alt="diff amp3 ac" src="https://github.com/user-attachments/assets/06c49564-568a-4815-a2e4-f3a115469829" />
+
+---
+
+### From Plot:
+
+- Gain ≈ −3 dB  
+- Bandwidth ≈ 1 GHz  
+
+---
+
+### Gain Calculation:
+
+\[
+A_v = 10^{-3/20} = 0.707
+\]
+
+---
+
+### Unity Gain Bandwidth:
+
+\[
+UGB = A_v \times BW
+\]
+
+\[
+UGB = 0.707 \times 1GHz = 0.707GHz
+\]
+
+---
+
+## 🔷 Observations:
+
+- Low gain  
+- High bandwidth  
+- Inverting behavior  
+
+---
+
+# 🔷 FINAL RESULTS
+
+| Parameter | Value |
+|----------|------|
+| DC Current | 0.2 mA |
+| Gain (small signal) | 0.0325 |
+| Gain (large signal) | 0.1 |
+| AC Gain | 0.707 |
+| Bandwidth | ~1 GHz |
+| UGB | ~0.7 GHz |
+
+---
+
+# 🔷 CONCLUSION
+
+The differential amplifier operates correctly with proper current splitting and saturation.
+
+- Linear behavior observed for small inputs  
+- Non-linear distortion for large inputs  
+- Wide bandwidth but low gain  
+
+---
+
+# 🔷 FINAL STATEMENT
+
+The designed CMOS differential amplifier demonstrates stable operation with correct biasing, showing linear amplification for small signals and non-linear behavior for large signals, making it suitable for high-speed low-gain applications.
+
+---
